@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         小新脚本，全网VIP视频破解,去广告,无需关注公众号，百度网盘直链下载，大小无限制. 全网音乐解析, 音乐免费下载在线听，知乎解析增强，下载知乎视频,CSDN使用增强等多功能脚本等等
-// @namespace    http://jx.xiaoxinlm.com/01.html
+// @namespace    http://jx.xiaoxinlm.com/
 // @version      1.0
 // @description  【维护更新中 功能有】1：百度网盘直链下载 可以一次性下载单文件,大小没有限制. 2：视频解析，支持大部分视频播放平台；3：知乎   外链接直接跳出 短视频下载  问答时间可视化 内容自动展开  免登录 4：CSDN阅读加强：CSDN自动展开、去广告、净化剪贴板、免登陆等、去广告、净化剪贴板、免登陆等；5：全网音乐免费听直接下载.等等
 // @author       小新博客 www.xiaoxinlm.com
@@ -92,16 +92,16 @@
 	'use strict';
 	/////***********************
 	//
-	var isOpenVideoVipModule = true;   
-	var isOpenMusicVipModule = true;  
-	var isOpenGoodsCouponModule = true;//是否开启优惠券模块
-	var isOpenZhihuModule = true;      
+	var isOpenVideoVipModule = true;
+	var isOpenMusicVipModule = true;
+	var isOpenGoodsCouponModule = true;
+	var isOpenZhihuModule = true;
 	/////***********************
-	
+
 	var $ = $ || window.$;
 	var window_url = window.location.href;
 	var website_host = window.location.host;
-	
+
 	//百度网盘
 (function() {
 var pan_title=new Array()
@@ -111,7 +111,7 @@ var pan_title=new Array()
 		for(var a=0;a<pan_title.length;a++){
 			if(pan_link.indexOf(pan_title[a])!= -1){
                 pan_link = pan_link.replace('baidu.com','baiduwp.com');
-				var pan_html = "<a href="+pan_link+" target='_blank' style='cursor:pointer;z-index:98;display:block;width:30px;height:30px;line-height:30px;position:fixed;left:0;top:300px;text-align:center;'><img src='data:image/gif;base64,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' style='width:50px' ></a>";
+				var pan_html = "<a href="+pan_link+" target='_blank' style='cursor:pointer;z-index:98;display:block;width:30px;height:30px;line-height:30px;position:fixed;left:0;top:300px;text-align:center;'></a>";
 				$("body").append(pan_html);
 
 //百度网盘脚本开始
@@ -1175,7 +1175,7 @@ var pan_title=new Array()
 		var reWY = /163(.*)song/i;
 		var reQQ = /QQ(.*)song/i;
 		var reKG = /kugou(.*)song/i;
-		
+
 		var ayaMusicWebsite2 = "http://yy.xiaoxinlm.com/?url=";
 		var ayaMusicTitle2 = "http://yy.xiaoxinlm.com/?name=@name@&type=netease";
 		var vipBtn = '<div>';
@@ -1188,14 +1188,14 @@ var pan_title=new Array()
 		    var titleText = $(".tit").text();
 		    $('#ayasongurl999').attr('href', ayaMusicWebsite2 + encodeURIComponent(window.location.href.replace('://music.163.com', "://music.163.com/#")));
 		    $('#ayasongtitle999').attr("href", ayaMusicTitle2.replace("@name@", titleText));
-		
+
 		}else if(reQQ.test(window_url)){
 			var $title = $('.data__name_txt');
 			var titleText = $(".data__name_txt").text();
 		    $title.parent('.data__name').after(vipBtn);
 		    $('#ayasongurl999').attr('href', ayaMusicWebsite2 + encodeURIComponent(window.location.href));
 		    $('#ayasongtitle999').attr("href", ayaMusicTitle2.replace("@name@", titleText));
-		    
+
 		}else if(reKG.test(window_url)){
 			setTimeout(function(){
 				var $title = $('.audioName');
@@ -1215,7 +1215,7 @@ var pan_title=new Array()
 		musicvip.start();
 	}
 
-	
+
 	//--VIP视频破解开始
 	var VIPVIDEO={};
 	VIPVIDEO.analysisWebsite="http://yy.xiaoxinlm.com/jiexi/?url=@@";
@@ -1233,7 +1233,7 @@ var pan_title=new Array()
    		return isVip;
 	};
 	VIPVIDEO.addStyle=function(){
-		var innnerCss = 
+		var innnerCss =
 		`
 		#plugin_kiwi_analysis_vip_movie_box{position:fixed; top:290px; left:0px; width:35px; background-color:#BC2405;z-index:9999999899999;}
 		#plugin_kiwi_analysis_vip_movie_box >.plugin_item{cursor:pointer; width:33px; padding:10px 0px; text-align:center;}
@@ -1265,7 +1265,7 @@ var pan_title=new Array()
 	if(isOpenVideoVipModule){
 		VIPVIDEO.start();
 	}
-	
+
 	//--知乎助手开始
 	var zhihuHelper={};
 	zhihuHelper.start = function(){
@@ -1296,7 +1296,7 @@ var pan_title=new Array()
 			        }
 		        }
 		    }
-		    
+
 		    //去除广告，可能造成误伤，用最小策略
 		    function clearAdvert() {
 		    	const ad1 = document.querySelector('.AppBanner');
@@ -1308,7 +1308,7 @@ var pan_title=new Array()
 		            ad2.style.display = "none";
 		        }
 		    }
-	        
+
 	        //去除登录提示
 	        function noLoginBox(){
 				var IntervalUnit = 20;
@@ -1320,13 +1320,13 @@ var pan_title=new Array()
 					if(totalIntervalMs >= 2000){  //循环多次，我就不信还显示
 						clearInterval(loginInterval);
 					}
-				}, IntervalUnit); 
+				}, IntervalUnit);
 				$(".AppHeader-login").click(function(){
 					clearInterval(loginInterval);
 					$(".Modal-wrapper").show();
 				});
 	        }
-		    
+
 		    //更改为直接高清显示
 		    function changeHeightQualityPic(){
 		    	$("body").find("img").each(function(){
@@ -1336,18 +1336,18 @@ var pan_title=new Array()
 		    		}
 		    	});
 		    }
-		    
-		    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-		    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18 
-		    function timeFormat(time, fmt) { //author: meizz 
+
+		    // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+		    // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+		    function timeFormat(time, fmt) { //author: meizz
 		        var o = {
-		            "M+": time.getMonth() + 1, //月份 
-		            "d+": time.getDate(), //日 
-		            "h+": time.getHours(), //小时 
-		            "m+": time.getMinutes(), //分 
-		            "s+": time.getSeconds(), //秒 
-		            "q+": Math.floor((time.getMonth() + 3) / 3), //季度 
-		            "S": time.getMilliseconds() //毫秒 
+		            "M+": time.getMonth() + 1, //月份
+		            "d+": time.getDate(), //日
+		            "h+": time.getHours(), //小时
+		            "m+": time.getMinutes(), //分
+		            "s+": time.getSeconds(), //秒
+		            "q+": Math.floor((time.getMonth() + 3) / 3), //季度
+		            "S": time.getMilliseconds() //毫秒
 		        };
 		        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (time.getFullYear() + "").substr(4 - RegExp.$1.length));
 		        for (var k in o)
@@ -1355,14 +1355,14 @@ var pan_title=new Array()
 		                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 		        return fmt;
 		    }
-		    
+
 		    function questiodate() {
 		        function QuestionPage() {
 		            const title = document.querySelector(".QuestionPage");
 		            if (title) {
 		                const dateCreated = title.querySelector("[itemprop~=dateCreated][content]").content;
 		                const dateModified = title.querySelector("[itemprop~=dateModified][content]").content;
-		
+
 		                const ctime = timeFormat(new Date(dateCreated), "yyyy-MM-dd hh:mm:ss");
 		                const mtime = timeFormat(new Date(dateModified), "yyyy-MM-dd hh:mm:ss");
 		                const side = title.querySelector(".QuestionHeader-side");
@@ -1372,7 +1372,7 @@ var pan_title=new Array()
 		                side.appendChild(timediv);
 		            }
 		        }
-		
+
 		        let listnum = 0;
 		        function ContentItem() {
 		            const list = document.querySelectorAll(".ContentItem");
@@ -1383,10 +1383,10 @@ var pan_title=new Array()
 		                    if (item.getAttribute('zh_date_mk') != 'true') {
 		                        const dateCreated = item.querySelector("[itemprop~=dateCreated][content]").content;
 		                        const dateModified = item.querySelector("[itemprop~=dateModified][content]").content;
-		
+
 		                        const ctime = timeFormat(new Date(dateCreated), "yyyy-MM-dd hh:mm:ss");
 		                        const mtime = timeFormat(new Date(dateModified), "yyyy-MM-dd hh:mm:ss");
-		
+
 		                        const sideitem = item.querySelector(".css-h5al4j");
 		                        var timediv = document.createElement('span');
 		                        timediv.innerHTML = `<p>创建于:&nbsp;${ctime}&nbsp;&nbsp;&nbsp;编辑于:&nbsp;${mtime}</p>`;
@@ -1401,12 +1401,12 @@ var pan_title=new Array()
 		        QuestionPage();
 		        document.querySelector(".Question-main").addEventListener('DOMNodeInserted', ContentItem);
 		    }
-		     
+
 		    if(window_url.indexOf("https://www.zhihu.com/question/") != -1) {
 		        autoExpandQuestionInfo();     //问题全部展开
         		questiodate();     //问题日期
 		    }
-		   
+
 		    noLoginBox();   //去除登录框
 		    setInterval(clearAdvert, 1000);  //去除广告
 		   	setInterval(changeHeightQualityPic, 500);   //图片自动高清
@@ -1415,7 +1415,7 @@ var pan_title=new Array()
 	if(isOpenZhihuModule){
 		zhihuHelper.start();
 	}
-	
+
 	//领券
 	var goodsCoupon={};
 	goodsCoupon.getPlatform=function(){
@@ -1453,15 +1453,15 @@ var pan_title=new Array()
 		if(platform=="taobao"){
 			goodsId = this.getQueryString("id");
 			goodsName=$(".tb-main-title").text();
-			
+
 		}else if(platform=="tmall"){
 			goodsId = this.getQueryString("id");
 			goodsName=$(".tb-detail-hd").text();
-			
+
 		}else if(platform=="jd"){
 			goodsName=$("div.sku-name").text();
 			goodsId = this.getQueryStringByUrl(websiteUrl);
-			
+
 		}else if(platform=="suning"){
 			var text = $("#itemDisplayName").text();
 			if(!!text){
@@ -1470,11 +1470,11 @@ var pan_title=new Array()
 			}
 			goodsName=text;
 			goodsId = this.getQueryStringByUrl(websiteUrl);
-			
+
 		}else if(platform=="vpinhui"){
 			goodsId = this.getQueryStringByUrl(websiteUrl).replace("detail-","");
 			goodsName = $(".pib-title-detail").text();
-			
+
 		}else if(platform=="pdd"){
 			goodsId = this.getQueryString("goods_id");
 			goodsName = $(".enable-select").text();
@@ -1492,7 +1492,7 @@ var pan_title=new Array()
 			var vaddition = vip[0];
 			var vid = vip[1];
 			goodsCouponUrl = goodsCouponUrl+"platform="+platform+"&id="+vid+"&q="+goodsName+"&addition="+vaddition;
-		}		
+		}
 		GM_xmlhttpRequest({
 			url: goodsCouponUrl,
 		  	method: "GET",
@@ -1524,7 +1524,7 @@ var pan_title=new Array()
 							$handler.parent().after(htmlText);
 						}else if(platform=="pdd"){
 							$handler.after(htmlText);
-						}					
+						}
 					}
 				}
 		  	}
@@ -1565,7 +1565,7 @@ var pan_title=new Array()
 			var goodsData = goodsCoupon.getGoodsData(platform);
 			goodsCoupon.createHtml(platform, goodsData.goodsId, goodsData.goodsName);
 		}
-	};	
+	};
 	if(isOpenGoodsCouponModule){
 		goodsCoupon.start();
 	}
